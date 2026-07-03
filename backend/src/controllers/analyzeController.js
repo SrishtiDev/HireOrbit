@@ -477,7 +477,7 @@ async function analyzeResume(req, res) {
         let fullRaw = '';
 
         const stream = await analysisClient.chat.completions.create({
-            model      : 'llama-3.3-70b-versatile',
+            model      : process.env.GROQ_MODEL_STAGE2 || 'openai/gpt-oss-120b',
             messages   : [
                 { role: 'system', content: ATS_SYSTEM_PROMPT },
                 { role: 'user',   content: userPrompt },
@@ -551,7 +551,7 @@ async function generateLatex(req, res) {
         ].join('\n');
 
         const response = await latexClient.chat.completions.create({
-            model      : 'llama-3.3-70b-versatile',
+            model      : process.env.GROQ_MODEL_STAGE3 || 'openai/gpt-oss-120b',
             messages   : [
                 { role: 'system', content: LATEX_SYSTEM_PROMPT },
                 { role: 'user',   content: userPrompt },
